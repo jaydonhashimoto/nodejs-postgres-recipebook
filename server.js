@@ -38,9 +38,19 @@ app.get('/', (req, res) => {
             console.log(err)
         }
         res.render('home', { recipes: result.rows });
-        pool.end()
     })
 });
+
+//add route
+app.post('/add', (req, res) => {
+    pool.query('INSERT INTO recipes (name, ingredients, directions) VALUES ($1, $2, $3)', [req.body.name, req.body.ingredients, req.body.directions], (error, result) => {
+        if (error) {
+            console.log(error)
+        }
+        res.redirect('/');
+    })
+});
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server Running On Port ${PORT}...`));
