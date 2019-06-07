@@ -51,6 +51,17 @@ app.post('/add', (req, res) => {
     })
 });
 
+//delete route
+app.post('/delete', (req, res) => {
+    pool.query('DELETE FROM recipes WHERE id = $1', [req.body.id], (error, results) => {
+        if (error) {
+            console.log(error)
+        }
+        console.log(`Recipe: ${req.body.id} Deleted...`);
+        res.redirect('/');
+    })
+});
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server Running On Port ${PORT}...`));

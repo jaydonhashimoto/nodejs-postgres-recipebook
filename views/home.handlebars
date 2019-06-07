@@ -3,7 +3,13 @@
 <ul class="list-group">
     {{#each recipes}}
     <li class="list-group-item">
-        <h4>{{this.name}} <button class="btn btn-danger float-right">Delete</button></h4>
+        <h4>
+            <form method="POST" action="/delete">
+                <input type="hidden" name="id" value="{{this.id}}" />
+                {{this.name}}
+                <input type="submit" class="btn btn-danger float-right delete-recipe" value="DELETE" />
+            </form>
+        </h4>
         <hr />
         <b>Ingredients: </b>{{this.ingredients}}<br />
         <b>Directions: </b>{{this.directions}}
