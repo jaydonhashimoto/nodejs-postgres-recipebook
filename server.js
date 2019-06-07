@@ -62,6 +62,22 @@ app.post('/delete', (req, res) => {
     })
 });
 
+//update route
+app.post('/edit', (req, res) => {
+    pool.query(
+        'UPDATE recipes SET name = $1, ingredients = $2, directions = $3 WHERE id = $4',
+        [req.body.name, req.body.ingredients, req.body.directions, req.body.id],
+        (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.redirect('/');
+        }
+    )
+});
+
+//set static folder
+app.use(express.static(path.join(__dirname, '/public')));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server Running On Port ${PORT}...`));

@@ -12,7 +12,12 @@
         </h4>
         <hr />
         <b>Ingredients: </b>{{this.ingredients}}<br />
-        <b>Directions: </b>{{this.directions}}
+        <b>Directions: </b>{{this.directions}}<br />
+        <button class="btn btn-warning edit-recipe" data-toggle="modal" data-target="#editFormModal"
+            data-id="{{this.id}}" data-name="{{this.name}}" data-ingredients="{{this.ingredients}}"
+            data-directions="{{this.directions}}">
+            UPDATE
+        </button>
     </li>
     {{/each}}
     <br />
@@ -40,6 +45,42 @@
                     <div class="form-group">
                         <label>Directions</label>
                         <textarea class="form-control" name="directions"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Form Modal -->
+<div class="modal fade" id="editFormModal" tabindex="-1" role="dialog" aria-labelledby="editFormModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="POST" action="/edit">
+                <input type="hidden" id="edit-form-id" name="id" />
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Edit Recipe</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Recipe Name</label>
+                        <input type="text" class="form-control" name="name" id="edit-form-name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Ingredients</label>
+                        <textarea class="form-control" name="ingredients" id="edit-form-ingredients"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Directions</label>
+                        <textarea class="form-control" name="directions" id="edit-form-directions"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
