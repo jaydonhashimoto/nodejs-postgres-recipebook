@@ -19,5 +19,11 @@ app.set('view engine', 'handlebars');
 //db connection string
 const connectionString = 'postgresql://jaydon:root@localhost/recipebook';
 
+//homepage route
+app.get('/', (req, res) => res.render('home', {
 
+}));
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server Running On Port ${PORT}...`));
 
