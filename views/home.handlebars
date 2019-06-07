@@ -1,1 +1,9 @@
 <h1>Home Page</h1>
+<ul class="list-group">
+    {{#each recipes}}
+    <li class="list-group-item">
+        <p>{{this.name}}</p>
+        <p>{{this.ingredients}}</p>
+        <p>{{this.directions}}</p>
+        {{/each}}
+</ul>

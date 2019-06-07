@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const pg = require('pg');
+const { Pool } = require('pg');
 
 const app = express();
 
@@ -17,12 +17,30 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 //db connection string
-const connectionString = 'postgresql://jaydon:root@localhost/recipebook';
+const connectionString = 'postgresql://jaydon:root@localhost:5432/recipebook';
+
+const pool = new Pool({
+    connectionString: connectionString,
+});
+
+// const pool = new Pool({
+//     user: 'jaydon',
+//     host: 'localhost',
+//     database: 'recipebook',
+//     password: 'root',
+//     port: 5433,
+// })
 
 //homepage route
-app.get('/', (req, res) => res.render('home', {
-
-}));
+app.get('/', (req, res) => {
+    pool.query('SELECT * FROM recipes', (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        res.render('home', { recipes: result.rows });
+        pool.end()
+    })
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server Running On Port ${PORT}...`));
