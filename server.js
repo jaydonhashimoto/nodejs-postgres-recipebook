@@ -17,8 +17,8 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 //db connection string
-const connectionString = 'postgresql://jaydon:root@localhost:5432/recipebook';
-
+// const connectionString = 'postgresql://jaydon:root@localhost:5432/recipebook';
+const connectionString = 'postgres://oufrntxkqioeiq:b0b67bd1a7a317d260df47145b7a3b489c49ab800e720db89763d7a1354ab274@ec2-75-101-147-226.compute-1.amazonaws.com:5432/dcgekstnehfq3u';
 const pool = new Pool({
     connectionString: connectionString,
 });
